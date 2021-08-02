@@ -1,0 +1,25 @@
+@import "../../variables";
+
+.Header {
+  padding: 20px 0;
+  background-color: $blue-5;
+
+  &__content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__leftSide {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__logo {
+    margin-right: 160px;
+  }
+}
+
+.logo {
+  font-size: 24px;
+}

@@ -1,0 +1,30 @@
+// цвета сайта
+
+$blue-1: #1f3f68;
+$blue-2: #316099;
+$blue-3: #356ead;
+$blue-4: #5a98d0;
+$blue-5: #98c3e8;
+$gradient: rgba($blue-5, 0.2);
+$mainColor: $blue-1;
+$white: #fff;
+$mainColor-hover: #000;
+$mainColor-light: rgba(#252525, 0.5);
+$white: #fff;
+$overlay: rgba(#000, 0.4);
+$pulseColor: adjust-hue($blue-5, 2deg);
+$error: rgba(#f00, 0.8);
+$valid: rgba(green, 0.8);
+
+// <Шрифт по умолчанию>========================
+$fontFamily: "Abel", sans-serif;
+$fontFamily2: "Abel", sans-serif;
+
+// <Переменные контейнера>=====================
+$minWidth: 320;
+$maxWidth: 1400;
+$maxWidthContainer: 1230;
+$md1: $maxWidthContainer + 12;
+$md2: 991.98;
+$md3: 767.98;
+$md4: 479.98;

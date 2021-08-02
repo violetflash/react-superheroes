@@ -1,0 +1,17 @@
+.Repo {
+  text-align: right;
+
+  &__img {
+    margin-right: 2px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__link {
+    color: #0e577f;
+
+    &:visited {
+      color: #0e577f;
+    }
+  }
+}
