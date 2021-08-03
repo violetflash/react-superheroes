@@ -101,3 +101,54 @@ a {
   width: 100%;
   max-width: $maxWidthContainer + px;
 }
+
+//loader
+
+.loader-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.ldio-bjmq8f3lyph div {
+  position: absolute;
+  animation: ldio-bjmq8f3lyph 1s linear infinite;
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  box-shadow: 0 2px 0 0 #5b8be1;
+  transform-origin: 40px 41px;
+}
+
+.loadingio-spinner-eclipse-lexqcs4gh8 {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.ldio-bjmq8f3lyph {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+
+  div {
+    box-sizing: content-box;
+  }
+}
+
+@keyframes ldio-bjmq8f3lyph {
+  0% {transform: rotate(0deg)}
+
+  50% {transform: rotate(180deg)}
+
+  100% {transform: rotate(360deg)}
+}
