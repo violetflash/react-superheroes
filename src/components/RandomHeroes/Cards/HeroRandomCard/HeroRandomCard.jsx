@@ -1,8 +1,8 @@
 import React from 'react';
 import s from "./HeroRandomCard.module.scss";
-import question from '../../../assets/images/question.png';
-import RestApiService from "../../../services/RestApiService";
-import Loader from '../../Loader/';
+import question from '../../../../assets/images/question.png';
+import RestApiService from "../../../../services/RestApiService";
+import Loader from '../../../Loader';
 
 class HeroRandomCard extends React.Component {
     state = {
