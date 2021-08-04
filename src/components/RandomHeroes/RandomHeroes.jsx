@@ -4,36 +4,46 @@ import RestApiService from '../../services/RestApiService/';
 import { getRandomIDsFromArr } from '../../functions/functions';
 import HeroRandomCard from './HeroRandomCard/';
 import Loader from "../Loader";
+import Error from "../Error";
 
 class RandomHeroes extends Component {
 
+    restApiService = new RestApiService();
     LS_KEY = 'heroesIDs';
     RAND_NUM = 10;
 
     state = {
         heroesID: [],
         isLoading: true,
-        updating: true
+        updating: true,
+        error: false
+    };
+
+    onError = () => {
+        this.setState({
+            error: true,
+            loading: false
+        });
     };
 
     componentDidMount() {
         if (!localStorage.getItem(this.LS_KEY)) {
             const array = [];
-            const data = new RestApiService();
-            data.getAllData().then(heroes => {
+            this.restApiService.getAllData().then(heroes => {
                 heroes.forEach(hero => {
 
                     array.push({
                         'id': hero.id,
                         'name': hero.name,
                         'fullName': hero.biography.fullName,
-                        'image': data.getImage(hero.slug, 'sm')
+                        'image': this.restApiService.getImage(hero.slug, 'md')
                     });
                 });
                 localStorage.setItem(this.LS_KEY, JSON.stringify(array));
                 this.setState({ heroesID: getRandomIDsFromArr(array, this.RAND_NUM) });
                 this.setState({ isLoading: false });
-            });
+            })
+                .catch(this.onError);
         } else {
             const array = JSON.parse(localStorage.getItem(this.LS_KEY));
             this.setState({ heroesID: getRandomIDsFromArr(array, this.RAND_NUM) });
@@ -50,35 +60,38 @@ class RandomHeroes extends Component {
                 this.setState({
                     heroesID: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
                 });
-            }, 3000);
+            }, 15000);
         }
     };
 
-    pauseUpdating = () => {
-        if (!this.state.updating) return;
-        this.setState({ updating: false });
-        clearInterval(this.updateInterval);
-        console.log('pause updating');
-    };
-
-    resumeUpdating = () => {
-        this.setState({ updating: true });
-        this.updateHeroes();
-    };
-
+    // pauseUpdating = () => {
+    //     if (!this.state.updating) return;
+    //     this.setState({ updating: false });
+    //     clearInterval(this.updateInterval);
+    //     console.log('pause updating');
+    // };
+    //
+    // resumeUpdating = () => {
+    //     this.setState({ updating: true });
+    //     this.updateHeroes();
+    // };
 
 
     render() {
-        // this.updateHeroes();
-
-        const renderCards = !this.state.isLoading ?
+        const cards = !(this.state.isLoading || this.state.error) ?
             this.state.heroesID.map(hero => <HeroRandomCard {...hero} key={hero.id}/>) :
-            <Loader />;
+            <Loader/>;
+
+        const errMessage = this.state.error ? <Error/> : null;
 
         return (
-            <section className={s.RandomHeroes} onMouseEnter={this.pauseUpdating} onMouseLeave={this.resumeUpdating}>
+            <section className={s.RandomHeroes}
+                // onMouseEnter={this.pauseUpdating}
+                // onMouseLeave={this.resumeUpdating}
+            >
                 <div className={s.RandomHeroes__cards}>
-                    {renderCards}
+                    {errMessage}
+                    {cards}
                 </div>
             </section>
         );

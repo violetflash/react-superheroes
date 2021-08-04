@@ -3,7 +3,7 @@ import s from "./Nav.module.scss";
 
 const Nav = () => {
 
-    const navList = ['Link1', 'Link2', 'Link3'];
+    const navList = ['All', 'Marvel', 'DC Comics'];
     const links = navList.map(link => (
         <a className={s.Nav__link}
            href=""

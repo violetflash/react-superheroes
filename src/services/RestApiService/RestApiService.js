@@ -14,7 +14,7 @@ export default class RestApiService {
     }
 
     getAllData() {
-        return this.getResource(`all.json`);
+        return this.getResource(`all1.json`);
     }
 
     getPerson(id) {

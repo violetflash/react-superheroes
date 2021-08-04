@@ -6,7 +6,7 @@ const Repo = () => (
     <div className={s.Repo}>
         <a
             className={s.Repo__link}
-            href="https://github.com/violetflash/react-todo"
+            href="https://github.com/violetflash/react-superheroes"
             target="_blank"
             rel="noopener noreferrer"
         >
