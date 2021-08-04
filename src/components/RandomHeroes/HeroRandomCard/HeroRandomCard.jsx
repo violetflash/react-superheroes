@@ -10,7 +10,7 @@ class HeroRandomCard extends React.Component {
     };
 
     componentDidMount() {
-        console.log('re-render');
+        // console.log('re-render');
     }
 
 

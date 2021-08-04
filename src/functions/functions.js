@@ -20,6 +20,7 @@ const checkLS = (key, field, initial) => (
 );
 
 const getRandomIDsFromArr = (arr, num) => {
+    if (!arr) return [];
     const newArr = new Set();
     while (newArr.size !== num)  {
         const elem = arr[Math.floor(Math.random() * arr.length)];

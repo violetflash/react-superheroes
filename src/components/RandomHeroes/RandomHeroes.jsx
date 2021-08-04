@@ -13,7 +13,7 @@ class RandomHeroes extends Component {
     RAND_NUM = 10;
 
     state = {
-        heroesID: [],
+        randomHeroes: [],
         isLoading: true,
         updating: true,
         error: false
@@ -22,9 +22,14 @@ class RandomHeroes extends Component {
     onError = () => {
         this.setState({
             error: true,
-            loading: false
+            loading: false,
+            isLoading: false
         });
     };
+
+    componentWillUnmount() {
+        clearInterval(this.updateInterval);
+    }
 
     componentDidMount() {
         if (!localStorage.getItem(this.LS_KEY)) {
@@ -40,13 +45,13 @@ class RandomHeroes extends Component {
                     });
                 });
                 localStorage.setItem(this.LS_KEY, JSON.stringify(array));
-                this.setState({ heroesID: getRandomIDsFromArr(array, this.RAND_NUM) });
+                this.setState({ randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM) });
                 this.setState({ isLoading: false });
             })
                 .catch(this.onError);
         } else {
             const array = JSON.parse(localStorage.getItem(this.LS_KEY));
-            this.setState({ heroesID: getRandomIDsFromArr(array, this.RAND_NUM) });
+            this.setState({ randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM) });
             this.setState({ isLoading: false });
         }
 
@@ -54,13 +59,13 @@ class RandomHeroes extends Component {
     }
 
     updateHeroes = () => {
-        console.log('start updating');
         if (this.state.updating) {
             this.updateInterval = setInterval(() => {
+                console.log('Updating...');
                 this.setState({
-                    heroesID: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
+                    randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
                 });
-            }, 15000);
+            }, 2000);
         }
     };
 
@@ -79,8 +84,10 @@ class RandomHeroes extends Component {
 
     render() {
         const cards = !(this.state.isLoading || this.state.error) ?
-            this.state.heroesID.map(hero => <HeroRandomCard {...hero} key={hero.id}/>) :
-            <Loader/>;
+            this.state.randomHeroes.map(hero => <HeroRandomCard {...hero} key={hero.id}/>) :
+            null;
+
+        const loader = this.state.isLoading ? <Loader/> : null;
 
         const errMessage = this.state.error ? <Error/> : null;
 
@@ -90,6 +97,7 @@ class RandomHeroes extends Component {
                 // onMouseLeave={this.resumeUpdating}
             >
                 <div className={s.RandomHeroes__cards}>
+                    {loader}
                     {errMessage}
                     {cards}
                 </div>
