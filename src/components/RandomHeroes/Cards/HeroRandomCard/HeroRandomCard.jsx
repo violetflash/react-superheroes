@@ -17,20 +17,6 @@ class HeroRandomCard extends React.Component {
     render() {
         const { id, name, fullName, image } = this.props;
 
-        const checkImageURL = url => {
-            fetch(url).then(response => {
-                if (response.ok) {
-                    return true;
-                }
-            })
-                .catch(e => {
-                    console.log(e);
-                })
-        };
-
-        const heroImg = checkImageURL(image) ? image : question;
-
-
         const addDefaultSrc = e => {
             e.target.src = question;
         };

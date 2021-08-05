@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../Header";
 import RandomHeroes from "../RandomHeroes";
+import Main from '../Main/';
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
         <>
             <Header/>
             <RandomHeroes/>
+            <Main />
         </>
     );
 }
