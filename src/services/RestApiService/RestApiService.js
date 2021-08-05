@@ -5,7 +5,7 @@ export default class RestApiService {
 
     //приватная часть класса. Не подлежит изменению снаружи
     _API_URL = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api';
-    _LS_KEY = 'heroesIDs';
+    _LS_KEY = 'heroesShortProps';
 
     async getResource(url) {
         const res = await fetch(`${this._API_URL}/${url}`);
@@ -19,7 +19,7 @@ export default class RestApiService {
     }
 
     async saveAllRandDataToLS() {
-        const heroes = await this.getResource('all.json');
+        const heroes = await this.getAllData();
         const newArray = heroes.map(hero => this._extractShortProps(hero));
         localStorage.setItem(this._LS_KEY, JSON.stringify(newArray));
         return newArray;

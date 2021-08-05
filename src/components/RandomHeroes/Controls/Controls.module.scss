@@ -1,6 +1,14 @@
 .Controls {
+  padding: 4px 0 3px;
+
   width: 100%;
   text-align: right;
   color: #fff;
   background-color: #141414;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 }

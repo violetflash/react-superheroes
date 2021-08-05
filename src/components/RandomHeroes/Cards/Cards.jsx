@@ -12,21 +12,21 @@ class Cards extends React.Component {
     }
 
     componentWillUnmount() {
-        clearInterval(this.props.updateInterval);
+        this.props.pauseUpdating();
     }
 
     render() {
 
-        const { randomHeroes, isLoading, error, pauseUpdating, resumeUpdating } = this.props;
+        const { randomHeroes, isLoading, error, pauseUpdating, updateHeroes } = this.props;
 
         const loader = isLoading ? <Loader/> : null;
         const cards = !(isLoading || error) ?
             randomHeroes.map(hero => <HeroRandomCard {...hero} key={hero.id}/>) :
             null;
-        const errMessage = error ? <Error/> : null;
+        const errMessage = error || randomHeroes.length === 0 ? <Error/> : null;
 
         return (
-            <section className={s.Cards} onMouseEnter={pauseUpdating} onMouseLeave={resumeUpdating}>
+            <section className={s.Cards} onMouseEnter={pauseUpdating} onMouseLeave={updateHeroes}>
                 <div className={s.Cards__cards}>
                     {loader}
                     {errMessage}

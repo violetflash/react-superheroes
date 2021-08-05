@@ -14,9 +14,9 @@ class RandomHeroes extends Component {
     state = {
         randomHeroes: [],
         isLoading: true,
-        updating: true,
         error: false,
-        randomOpened: true
+        randomOpened: true,
+        intervalID: null
     };
 
     onError = () => {
@@ -30,13 +30,7 @@ class RandomHeroes extends Component {
         //fills state with random heroes
         //check if data already exist
         if (localStorage.getItem(this.LS_KEY)) {
-            const array = JSON.parse(localStorage.getItem(this.LS_KEY));
-            this.setState({
-                randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM),
-                isLoading: false
-            });
-
-            // this.updateHeroes();
+            this.getRandomHeroesFromLS();
             return;
         }
 
@@ -49,21 +43,23 @@ class RandomHeroes extends Component {
         } catch (e) {
             this.onError(e);
         }
-
-        //starts setInterval
-        // this.updateHeroes();
     }
 
-    updateHeroes = () => {
-        if (this.state.updating) {
+    getRandomHeroesFromLS = () => {
+        const array = JSON.parse(localStorage.getItem(this.LS_KEY));
+        this.setState({
+            randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM),
+            isLoading: false
+        });
+    };
 
-            this.updateInterval = setInterval(() => {
-                console.log('Updating...');
-                this.setState({
-                    randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
-                });
-            }, 2000);
-        }
+    updateHeroes = () => {
+        const updateInterval = setInterval(() => {
+            this.setState({
+                randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
+            });
+        }, 15000);
+        this.setState({ intervalID: updateInterval });
     }
 
     toggleHandler = () => {
@@ -73,18 +69,9 @@ class RandomHeroes extends Component {
     }
 
     pauseUpdating = () => {
-        if (!this.state.updating) return;
-        this.setState({ updating: false });
-        clearInterval(this.updateInterval);
-        console.log('pause updating');
+        clearInterval(this.state.intervalID);
+        this.setState({ intervalID: null });
     };
-
-    resumeUpdating = () => {
-        console.log('resume updating');
-        this.setState({ updating: true });
-        this.updateHeroes();
-    };
-
 
     render() {
 
@@ -92,9 +79,7 @@ class RandomHeroes extends Component {
             <Cards
                 {...this.state}
                 updateHeroes={this.updateHeroes}
-                updateInterval={this.updateInterval}
                 pauseUpdating={this.pauseUpdating}
-                resumeUpdating={this.resumeUpdating}
             /> :
             null;
 
@@ -103,6 +88,9 @@ class RandomHeroes extends Component {
                 <Controls
                     toggleHandler={this.toggleHandler}
                     randomOpened={this.state.randomOpened}
+                    updateHeroes={this.updateHeroes}
+                    pauseUpdating={this.pauseUpdating}
+                    getRandomHeroesFromLS={this.getRandomHeroesFromLS}
                 />
                 {cards}
             </section>
