@@ -4,7 +4,7 @@ import s from './View.module.scss';
 const View = () => {
     return (
         <section className={s.View}>
-            <p>All heroes stats here!</p>
+            <p>All hero information here!</p>
         </section>
     );
 

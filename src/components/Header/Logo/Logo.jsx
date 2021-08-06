@@ -4,7 +4,7 @@ import s from "./Logo.module.scss";
 const Logo = () => (
     <figure className={s.Logo}>
         <img className={s.Logo__img} src="/assets/icons/superhero.svg" alt="Logo"/>
-        <figcaption className={s.Logo__text}>Super Hero App</figcaption>
+        <figcaption className={s.Logo__text}>Super Heroes App</figcaption>
     </figure>
 );
 

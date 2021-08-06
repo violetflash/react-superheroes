@@ -1,14 +1,16 @@
 @import "../../variables";
 
 .Header {
-  height: 7vh;
-  padding: 5px 0;
-  background-color: $blue-5;
+
+  background-color: $headerBgColor;
 
   &__content {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    height: 7vh;
+    padding: 5px 15px;
+    background-color: $white;
   }
 
   &__leftSide {

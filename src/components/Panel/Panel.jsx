@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { getRandomIDsFromArr } from "../../functions/functions";
 import Cards from "./Cards/";
 import Controls from "./Controls/";
+import SearchBar from "./SearchBar/";
 import RestApiService from "../../services/RestApiService/";
-import s from "./RandomHeroes.module.scss";
+import s from "./Panel.module.scss";
 
 
-class RandomHeroes extends Component {
+class Panel extends Component {
 
     restApiService = new RestApiService();
     LS_KEY = this.restApiService._LS_KEY;
@@ -87,18 +88,23 @@ class RandomHeroes extends Component {
             null;
 
         return (
-            <section className={s.RandomHeroes}>
-                <Controls
-                    toggleHandler={this.toggleHandler}
-                    randomOpened={this.props.randomOpened}
-                    updateHeroes={this.updateHeroes}
-                    pauseUpdating={this.pauseUpdating}
-                    getRandomHeroesFromLS={this.getRandomHeroesFromLS}
-                />
+            <section className={s.Panel}>
+                <div className="container">
+                    <div className={s.Panel__content}>
+                        <SearchBar />
+                        <Controls
+                            toggleHandler={this.toggleHandler}
+                            randomOpened={this.props.randomOpened}
+                            updateHeroes={this.updateHeroes}
+                            pauseUpdating={this.pauseUpdating}
+                            getRandomHeroesFromLS={this.getRandomHeroesFromLS}
+                        />
+                    </div>
+                </div>
                 {cards}
             </section>
         );
     }
 }
 
-export default RandomHeroes;
+export default Panel;

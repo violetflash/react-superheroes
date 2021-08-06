@@ -1,11 +1,12 @@
 @import "../../variables";
 
 .Main {
-  padding: 10px 0 10px;
-  //background-color: $blue-5;
+  background-color: $mainSectionBgColor;
 
   &__content {
     display: flex;
+    padding: 10px 0;
+    background-color: $white;
     //align-items: flex-start;
   }
 }

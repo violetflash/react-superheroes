@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../Header";
-import RandomHeroes from "../RandomHeroes";
+import Panel from "../Panel";
 import Main from '../Main/';
 import RestApiService from "../../services/RestApiService";
 
@@ -29,7 +29,7 @@ class App extends Component {
         return (
             <>
                 <Header/>
-                <RandomHeroes
+                <Panel
                     toggleHandler={this.toggleHandler}
                     randomOpened={this.state.randomOpened}
                     setTarget={this.setTarget}
