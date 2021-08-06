@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RestApiService from "../../../services/RestApiService";
 import s from './HeroList.module.scss';
+import { addConditionedStyle } from '../../../functions/functions';
 
 class HeroList extends Component {
 
@@ -23,9 +24,11 @@ class HeroList extends Component {
                 <button>{hero.name}</button>
             </li>
         ));
+        const ulClass = addConditionedStyle(!this.props.randomOpened, [s.List__ul], s.full);
+
         return (
             <aside className={s.List}>
-                <ul className={s.List__ul}>
+                <ul className={ulClass.join(' ')}>
                     {listOfHeroes}
                 </ul>
             </aside>

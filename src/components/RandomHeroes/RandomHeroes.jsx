@@ -5,17 +5,19 @@ import Controls from "./Controls/";
 import RestApiService from "../../services/RestApiService/";
 import s from "./RandomHeroes.module.scss";
 
+
 class RandomHeroes extends Component {
 
     restApiService = new RestApiService();
     LS_KEY = this.restApiService._LS_KEY;
     RAND_NUM = 10;
+    toggleHandler = this.props.toggleHandler;
 
     state = {
         randomHeroes: [],
         isLoading: true,
         error: false,
-        randomOpened: true,
+        // randomOpened: true,
         intervalID: null
     };
 
@@ -62,11 +64,11 @@ class RandomHeroes extends Component {
         this.setState({ intervalID: updateInterval });
     }
 
-    toggleHandler = () => {
-        this.setState(() => {
-            return { randomOpened: !this.state.randomOpened };
-        });
-    }
+    // toggleHandler = () => {
+    //     this.setState(() => {
+    //         return { randomOpened: !this.state.randomOpened };
+    //     });
+    // }
 
     pauseUpdating = () => {
         clearInterval(this.state.intervalID);
@@ -75,7 +77,7 @@ class RandomHeroes extends Component {
 
     render() {
 
-        const cards = this.state.randomOpened ?
+        const cards = this.props.randomOpened ?
             <Cards
                 {...this.state}
                 updateHeroes={this.updateHeroes}
@@ -87,7 +89,7 @@ class RandomHeroes extends Component {
             <section className={s.RandomHeroes}>
                 <Controls
                     toggleHandler={this.toggleHandler}
-                    randomOpened={this.state.randomOpened}
+                    randomOpened={this.props.randomOpened}
                     updateHeroes={this.updateHeroes}
                     pauseUpdating={this.pauseUpdating}
                     getRandomHeroesFromLS={this.getRandomHeroesFromLS}
