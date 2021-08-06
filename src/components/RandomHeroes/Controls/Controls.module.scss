@@ -1,10 +1,12 @@
+@import "../../../variables";
+
 .Controls {
   padding: 4px 0 3px;
   height: 3vh;
   width: 100%;
   text-align: right;
   color: #fff;
-  background-color: #141414;
+  background-color: $randomHeroesBgColor;
 
   &__content {
     display: flex;

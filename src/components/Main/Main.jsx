@@ -3,12 +3,12 @@ import s from './Main.module.scss';
 import HeroList from "./HeroList";
 import View from './View/';
 
-const Main = ({ randomOpened }) => {
+const Main = props => {
     return (
         <section className={s.Main}>
             <div className="container">
                 <div className={s.Main__content}>
-                    <HeroList randomOpened={randomOpened}/>
+                    <HeroList {...props}/>
                     <View />
                 </div>
             </div>

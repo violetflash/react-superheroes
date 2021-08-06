@@ -82,6 +82,7 @@ class RandomHeroes extends Component {
                 {...this.state}
                 updateHeroes={this.updateHeroes}
                 pauseUpdating={this.pauseUpdating}
+                setTarget={this.props.setTarget}
             /> :
             null;
 

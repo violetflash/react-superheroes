@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import Header from "../Header";
 import RandomHeroes from "../RandomHeroes";
 import Main from '../Main/';
+import RestApiService from "../../services/RestApiService";
 
 class App extends Component {
     state = {
-        randomOpened: true
+        randomOpened: true,
+        target: null
     }
+
+    data = new RestApiService();
 
     toggleHandler = () => {
         this.setState(() => {
@@ -14,13 +18,27 @@ class App extends Component {
         });
     }
 
+    setTarget = id => {
+        this.data.getPerson(id).then(res => {
+            this.setState({ target: res });
+        });
+    };
+
     render() {
 
         return (
             <>
                 <Header/>
-                <RandomHeroes toggleHandler={this.toggleHandler} randomOpened={this.state.randomOpened}/>
-                <Main randomOpened={this.state.randomOpened}/>
+                <RandomHeroes
+                    toggleHandler={this.toggleHandler}
+                    randomOpened={this.state.randomOpened}
+                    setTarget={this.setTarget}
+                />
+                <Main
+                    randomOpened={this.state.randomOpened}
+                    setTarget={this.setTarget}
+                    currentTarget={this.state.target}
+                />
             </>
         );
     }

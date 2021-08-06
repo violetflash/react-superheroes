@@ -9,7 +9,8 @@ class HeroList extends Component {
     LS_KEY = this.restApiService._LS_KEY;
 
     state = {
-        allHeroes: []
+        allHeroes: [],
+        activeBtnID: null
     };
 
     componentDidMount() {
@@ -19,11 +20,33 @@ class HeroList extends Component {
     }
 
     render() {
-        const listOfHeroes = this.state.allHeroes.map(hero => (
-            <li key={hero.id}>
-                <button>{hero.name}</button>
-            </li>
-        ));
+        const { setTarget } = this.props;
+
+        const btnHandler = id => {
+            setTarget(id);
+            this.setState({ activeBtnID:  id });
+        };
+
+        const listOfHeroes = this.state.allHeroes.map(hero => {
+            const btnClass = addConditionedStyle(
+                this.state.activeBtnID === hero.id,
+                [s.List__btn],
+                s.active
+            );
+
+
+            return (
+                <li key={hero.id}>
+                    <button
+                        type="button"
+                        className={btnClass.join(' ')}
+                        onClick={() => btnHandler(hero.id)}
+                    >
+                        <span>{hero.name}</span>
+                    </button>
+                </li>
+            );
+        });
         const ulClass = addConditionedStyle(!this.props.randomOpened, [s.List__ul], s.full);
 
         return (

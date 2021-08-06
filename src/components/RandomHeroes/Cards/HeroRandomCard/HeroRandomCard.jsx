@@ -1,7 +1,6 @@
 import React from 'react';
 import s from "./HeroRandomCard.module.scss";
 import question from '../../../../assets/images/question.png';
-import RestApiService from "../../../../services/RestApiService";
 import Loader from '../../../Loader';
 
 class HeroRandomCard extends React.Component {
@@ -26,8 +25,7 @@ class HeroRandomCard extends React.Component {
         };
 
         const cardClick = id => {
-            const data = new RestApiService();
-            data.getPerson(id).then(res => console.log(res));
+            this.props.setTarget(id);
         };
 
         const loader = this.state.loading ? <Loader/> : null;
