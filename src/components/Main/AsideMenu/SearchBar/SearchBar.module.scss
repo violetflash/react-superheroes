@@ -1,0 +1,10 @@
+@import "../../../../variables";
+
+.SearchBar {
+  margin-right: auto;
+  padding: 5px;
+  width: 100%;
+  height: $searchBarHeight;
+  border: none;
+  border-bottom: 2px solid $marvel;
+}

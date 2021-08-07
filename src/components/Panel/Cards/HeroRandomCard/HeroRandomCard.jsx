@@ -14,7 +14,7 @@ class HeroRandomCard extends React.Component {
 
 
     render() {
-        const { id, name, fullName, image } = this.props;
+        const { id, name, image } = this.props;
 
         const addDefaultSrc = e => {
             e.target.src = question;
@@ -48,7 +48,7 @@ class HeroRandomCard extends React.Component {
                     <span className={s.Card__name}>{name}</span>
                     <span className={s.Card__line}/>
                 </div>
-                <span className={s.Card__fullName}>{fullName === name ? '' : fullName}</span>
+                {/*<span className={s.Card__fullName}>{fullName === name ? '' : fullName}</span>*/}
             </article>
         );
     }

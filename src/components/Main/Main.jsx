@@ -1,25 +1,20 @@
 import React from 'react';
 import s from './Main.module.scss';
-import HeroList from "./HeroList";
 import View from './View/';
-import styled from 'styled-components';
-import bg from '../../assets/images/carbon.png';
-
-const MainSection = styled.section`
-  //background-image: url(${bg});
-  background-size: 10px;
-`;
+import AsideMenu from "./AsideMenu";
 
 const Main = props => {
+    const { target } = props;
+
     return (
-        <MainSection className={s.Main}>
+        <section className={s.Main}>
             <div className="container">
                 <div className={s.Main__content}>
-                    <HeroList {...props}/>
-                    <View />
+                    <AsideMenu {...props}/>
+                    <View target={target}/>
                 </div>
             </div>
-        </MainSection>
+        </section>
     );
 
 };

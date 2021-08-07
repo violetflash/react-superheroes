@@ -1,8 +1,11 @@
+@import "../../../variables";
+
 .View {
   display: flex;
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  padding: 0 10px 0 20px;
-
+  margin: 41px 0 0 0;
+  padding: 15px 10px 0 20px;
+  background-color: #fff;
 }

@@ -21,7 +21,9 @@ class App extends Component {
     setTarget = id => {
         this.data.getPerson(id).then(res => {
             this.setState({ target: res });
+            console.log(res);
         });
+
     };
 
     render() {
@@ -37,7 +39,7 @@ class App extends Component {
                 <Main
                     randomOpened={this.state.randomOpened}
                     setTarget={this.setTarget}
-                    currentTarget={this.state.target}
+                    target={this.state.target}
                 />
             </>
         );

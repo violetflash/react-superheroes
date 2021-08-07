@@ -1,10 +1,16 @@
 import React from 'react';
 import s from './View.module.scss';
+import HeroCard from './HeroCard/';
 
-const View = () => {
+const View = ({ target }) => {
+
+    const content = target ? <HeroCard {...target}/> :
+        <p>Choose a hero to see his specification</p>;
+
+
     return (
         <section className={s.View}>
-            <p>All hero information here!</p>
+            {content}
         </section>
     );
 

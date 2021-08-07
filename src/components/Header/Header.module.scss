@@ -1,15 +1,15 @@
 @import "../../variables";
 
 .Header {
+  background: $headerBgColor;
 
-  background-color: $headerBgColor;
 
   &__content {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    height: 7vh;
-    padding: 5px 15px;
+    height: $headerHeight;
+    padding: 5px 0;
     background-color: $white;
   }
 

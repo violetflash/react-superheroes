@@ -5,8 +5,8 @@ export default class RestApiService {
 
     //приватная часть класса. Не подлежит изменению снаружи
     _API_URL = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api';
-    _LS_KEY = 'heroesShortProps';
-    _LS_FULL_KEY = 'allHeroesList';
+    _LS_KEY = 'heroes';
+    // _LS_FULL_KEY = 'allHeroesList';
 
     async getResource(url) {
         const res = await fetch(`${this._API_URL}/${url}`);

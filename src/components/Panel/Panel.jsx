@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getRandomIDsFromArr } from "../../functions/functions";
 import Cards from "./Cards/";
 import Controls from "./Controls/";
-import SearchBar from "./SearchBar/";
 import RestApiService from "../../services/RestApiService/";
 import s from "./Panel.module.scss";
 
@@ -91,7 +90,7 @@ class Panel extends Component {
             <section className={s.Panel}>
                 <div className="container">
                     <div className={s.Panel__content}>
-                        <SearchBar />
+
                         <Controls
                             toggleHandler={this.toggleHandler}
                             randomOpened={this.props.randomOpened}

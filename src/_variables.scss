@@ -1,5 +1,4 @@
 // цвета сайта
-
 $blue-1: #1f3f68;
 $blue-2: #316099;
 $blue-3: #356ead;
@@ -8,19 +7,32 @@ $blue-5: #98c3e8;
 $marvel: #F0131E;
 $captainAmerica: #1849CA;
 $white: #fff;
-
 $gradient: rgba($blue-5, 0.2);
-$headerBgColor: $marvel;
+$headerBgColor: $white;
 $panelColor: #141414;
 $randomHeroesBgColor: #141414;
-$mainSectionBgColor: #f8f6f6;
+$mainSectionBgColor: linear-gradient(135deg, #f5f7fa 0%, #e0e6f3 100%);
+
+
 $mainColor: $blue-1;
+$secondColor: #8f8f8f;
 $mainColor-hover: #000;
 $mainColor-light: rgba(#252525, 0.5);
 $overlay: rgba(#000, 0.4);
 $pulseColor: adjust-hue($blue-5, 2deg);
 $error: rgba(#f00, 0.8);
 $valid: rgba(green, 0.8);
+
+//  Height values
+$headerHeight: 7vh;
+$panelHeight: 4vh;
+$randomHeroesHeight: 27vh;
+$searchBarHeight: 4vh;
+$heroListHeightFull: 100vh - $headerHeight - $panelHeight - $searchBarHeight - 2;
+$heroListHeightShort: 100vh - $headerHeight - $panelHeight - $searchBarHeight - $randomHeroesHeight - 2;
+
+//HeroCard image size
+$heroCardFigureWidth: 320px;
 
 // <Шрифт по умолчанию>========================
 $fontFamily: "Abel", sans-serif;

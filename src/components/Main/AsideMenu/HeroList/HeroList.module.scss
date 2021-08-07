@@ -1,18 +1,18 @@
-@import "../../../variables";
+@import "../../../../variables";
 
 .List {
-  max-width: 180px;
-  &__ul {
-    margin: 0;
-    height: 58vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
+  margin: 0;
+  padding-top: 5px;
+  height: $heroListHeightShort;
+  overflow-y: auto;
+  overflow-x: hidden;
+
 
   &__btn {
     padding: 3px 5px;
     width: 100%;
     text-align: left;
+    //white-space: nowrap;
 
     span {
       display: block;
@@ -27,7 +27,7 @@
 }
 
 .full {
-  height: 86vh;
+  height: $heroListHeightFull;
 }
 
 .active {
