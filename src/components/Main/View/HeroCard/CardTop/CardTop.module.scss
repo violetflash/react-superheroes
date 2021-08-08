@@ -16,6 +16,10 @@
     width: 100%;
   }
 
+  &__names {
+    min-height: 90px;
+  }
+
   &__name,
   &__fullName {
     text-align: center;
@@ -33,6 +37,8 @@
   }
 
   &__column {
+    max-width: 200px;
+    width: 100%;
     > span {
       display: block;
       margin-bottom: 10px;

@@ -60,7 +60,7 @@ class Panel extends Component {
             this.setState({
                 randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
             });
-        }, 15000);
+        }, 10000);
         this.setState({ intervalID: updateInterval });
     }
 
@@ -83,6 +83,7 @@ class Panel extends Component {
                 updateHeroes={this.updateHeroes}
                 pauseUpdating={this.pauseUpdating}
                 setTarget={this.props.setTarget}
+                target={this.props.target}
             /> :
             null;
 

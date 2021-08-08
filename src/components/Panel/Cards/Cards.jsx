@@ -17,11 +17,16 @@ class Cards extends React.Component {
 
     render() {
 
-        const { randomHeroes, isLoading, error, pauseUpdating, updateHeroes } = this.props;
+        const { randomHeroes, isLoading, error, pauseUpdating, updateHeroes, setTarget } = this.props;
 
         const loader = isLoading ? <Loader/> : null;
         const cards = !(isLoading || error) ?
-            randomHeroes.map(hero => <HeroRandomCard {...hero} key={hero.id} setTarget={this.props.setTarget}/>) :
+            randomHeroes.map(hero => <HeroRandomCard
+                {...hero}
+                key={hero.id}
+                setTarget={setTarget}
+                target={this.props.target}
+            />) :
             null;
         const errMessage = error || randomHeroes.length === 0 ? <Error/> : null;
 

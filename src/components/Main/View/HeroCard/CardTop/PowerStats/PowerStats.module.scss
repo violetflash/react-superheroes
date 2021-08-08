@@ -1,0 +1,18 @@
+.PowerStats {
+  margin-left: 50px;
+  flex-grow: 1;
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    //max-width: 400px;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+}

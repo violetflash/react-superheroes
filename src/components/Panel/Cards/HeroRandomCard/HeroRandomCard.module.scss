@@ -8,7 +8,8 @@
   overflow: hidden;
   width: calc((100% - 2px) / 10);
   margin: 0 5px;
-  //border-radius: 10px;
+  outline: 3px solid transparent;
+
   box-shadow: 0 1px 2px 0 #ccc;
   transform: translateY(0);
   transition: all 0.3s ease;
@@ -97,4 +98,9 @@
       visibility: visible;
     }
   }
+}
+
+.active {
+  outline: 2px solid darkgoldenrod;
+  transform: translateY(-5px);
 }

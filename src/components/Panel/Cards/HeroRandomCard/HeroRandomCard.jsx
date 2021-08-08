@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./HeroRandomCard.module.scss";
 import question from '../../../../assets/images/question.png';
 import Loader from '../../../Loader';
+import { addConditionedStyle } from "../../../../functions/functions";
 
 class HeroRandomCard extends React.Component {
     state = {
@@ -12,6 +13,9 @@ class HeroRandomCard extends React.Component {
         // console.log('re-render');
     }
 
+    componentDidUpdate() {
+        // console.log(this.props.id, this.props.target);
+    }
 
     render() {
         const { id, name, image } = this.props;
@@ -37,8 +41,13 @@ class HeroRandomCard extends React.Component {
             src={image} alt={name}
         />;
 
+        const cardClass = addConditionedStyle(
+            this.props.target && this.props.target.id === id,
+            [s.Card],
+            s.active);
+
         return (
-            <article className={s.Card} onClick={() => cardClick(id)}>
+            <article className={cardClass.join(' ')} onClick={() => cardClick(id)}>
                 <figure className={s.Card__imgWrapper}>
                     {loader}
                     {img}

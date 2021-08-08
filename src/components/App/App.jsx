@@ -35,6 +35,7 @@ class App extends Component {
                     toggleHandler={this.toggleHandler}
                     randomOpened={this.state.randomOpened}
                     setTarget={this.setTarget}
+                    target={this.state.target}
                 />
                 <Main
                     randomOpened={this.state.randomOpened}

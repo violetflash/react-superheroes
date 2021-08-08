@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './CardTop.module.scss';
 import { addConditionedStyle, capitalizer } from "../../../../../functions/functions";
+import PowerStats from "./PowerStats/";
 
 const CardTop = props => {
     const fullName = props.name !== props.biography.fullName ? props.biography.fullName : null;
@@ -10,53 +11,53 @@ const CardTop = props => {
         [s.Top__alignment],
         s.green);
 
-    const race = props.appearance.race ?
-        <span className={s.Top__infoItem}>
-            <span className={s.Top__cat}>Race:</span>
-            {props.appearance.race}
-        </span> : null;
+    const getProp = (condition, title, value, propClassName = s.Top__infoItem) => {
+        const newValue = condition ? value : 'no data found';
 
-    const weight = (props.appearance.weight && parseInt(props.appearance.weight[1]) > 0) ?
-        <span className={s.Top__infoItem}>
-            <span className={s.Top__cat}>weight:</span>
-            {props.appearance.weight[1]}
-        </span> :
-        null;
+        return (
+            <span className={propClassName}>
+                <span className={s.Top__cat}>{title}:</span>
+                {newValue}
+            </span>
+        );
+    };
 
-    const height = (props.appearance.height && parseInt(props.appearance.height[1]) > 0) ?
-        <span className={s.Top__infoItem}>
-            <span className={s.Top__cat}>height:</span>
-            {props.appearance.height[1]}
-        </span> :
-        null;
+    const alignment = getProp(
+        props.biography.alignment !== "-", 'alignment',
+        capitalizer(props.biography.alignment), alignmentClass.join(' '));
 
-    const hairColor = (props.appearance.hairColor && props.appearance.hairColor.length > 1) ?
-        <span className={s.Top__infoItem}>
-            <span className={s.Top__cat}>hairColor:</span>
-            {props.appearance.hairColor}
-        </span> :
-        null;
+    const gender = getProp(
+        props.appearance.gender !== "-", 'gender',
+        props.appearance.gender);
 
-    const eyeColor = (props.appearance.eyeColor && props.appearance.eyeColor.length > 1) ?
-        <span className={s.Top__infoItem}>
-            <span className={s.Top__cat}>eyeColor:</span>
-            {props.appearance.eyeColor}
-        </span> :
-        null;
+    const race = getProp(
+        props.appearance.race, 'race',
+        props.appearance.race);
 
-    const aliases = props.biography.aliases && props.biography.aliases[0] !== "-" ?
-        <span className={s.Top__aliases}>
-            <span className={s.Top__cat}>aliases:</span>
-            {props.biography.aliases.join(', ')}
-        </span> :
-        null;
+    const weight = getProp(
+        props.appearance.weight && parseInt(props.appearance.weight[1]) > 0, 'weight',
+        props.appearance.weight[1]);
 
-    const occupation = props.work.occupation && props.work.occupation !== "-" ?
-        <span className={s.Top__occupation}>
-            <span className={s.Top__cat}>occupation:</span>
-            {props.work.occupation}
-        </span> :
-        null;
+    const height = getProp(
+        props.appearance.weight && parseInt(props.appearance.height[1]) > 0, 'height',
+        props.appearance.height[1]);
+
+    const hairColor = getProp(
+        props.appearance.hairColor.length > 1, 'hairColor',
+        props.appearance.hairColor);
+
+    const eyeColor = getProp(
+        props.appearance.eyeColor.length > 1, 'eyeColor',
+        props.appearance.eyeColor);
+
+    const aliases = getProp(
+        props.biography.aliases[0] !== "-", 'aliases',
+        props.biography.aliases.join(', '), s.Top__aliases);
+
+    const occupation = getProp(
+        props.work.occupation && props.work.occupation !== "-", 'occupation',
+        props.work.occupation, s.Top__occupation);
+
 
     return (
         <div className={s.Top}>
@@ -64,8 +65,10 @@ const CardTop = props => {
                 <img className={s.Top__img} src={props.images.lg} alt={props.name}/>
             </figure>
             <div className={s.Top__infoBlock}>
-                <h1 className={s.Top__name}>{props.name}</h1>
-                <h2 className={s.Top__fullName}>{fullName}</h2>
+                <div className={s.Top__names}>
+                    <h1 className={s.Top__name}>{props.name}</h1>
+                    <h2 className={s.Top__fullName}>{fullName}</h2>
+                </div>
                 <div className={s.Top__mainInfo}>
                     {aliases}
                     {occupation}
@@ -73,21 +76,15 @@ const CardTop = props => {
 
                 <div className={s.Top__info}>
                     <div className={s.Top__column}>
-                        <span className={alignmentClass.join(' ')}>
-                            <span className={s.Top__cat}>alignment:</span>
-                            {capitalizer(props.biography.alignment)}
-                        </span>
+                        {alignment}
                         {race}
-                        <span className={s.Top__infoItem}>
-                            <span className={s.Top__cat}>gender:</span>
-                            {props.appearance.gender}
-                        </span>
+                        {gender}
                         {weight}
                         {height}
                         {hairColor}
                         {eyeColor}
-
                     </div>
+                    <PowerStats {...props.powerstats} />
                 </div>
             </div>
 
