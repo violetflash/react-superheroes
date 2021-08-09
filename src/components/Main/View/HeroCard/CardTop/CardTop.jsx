@@ -12,7 +12,7 @@ const CardTop = props => {
         s.green);
 
     const getProp = (condition, title, value, propClassName = s.Top__infoItem) => {
-        const newValue = condition ? value : 'no data found';
+        const newValue = condition ? value : 'n/a';
 
         return (
             <span className={propClassName}>
