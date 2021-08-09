@@ -1,19 +1,29 @@
 import React from 'react';
 import s from './View.module.scss';
 import HeroCard from './HeroCard/';
+import Error from "../../Error";
 
-const View = ({ target }) => {
+class View extends React.Component {
+    state = {
+        hasError: false
+    }
 
-    const content = target ? <HeroCard {...target}/> :
-        <p>Choose a hero to see his specification</p>;
+    componentDidCatch() {
+        this.setState({ hasError: true });
+    }
 
+    render() {
+        const { target } = this.props;
+        const content = this.state.hasError ? <Error /> :
+            target ? <HeroCard {...target}/> :
+                <p>Choose a hero to see his specification</p>;
 
-    return (
-        <section className={s.View}>
-            {content}
-        </section>
-    );
-
-};
+        return (
+            <section className={s.View}>
+                {content}
+            </section>
+        );
+    }
+}
 
 export default View;

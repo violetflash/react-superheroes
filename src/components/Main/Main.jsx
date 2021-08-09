@@ -3,7 +3,7 @@ import s from './Main.module.scss';
 import View from './View/';
 import AsideMenu from "./AsideMenu";
 
-const Main = props => {
+function Main(props) {
     const { target } = props;
 
     return (
@@ -16,7 +16,6 @@ const Main = props => {
             </div>
         </section>
     );
-
-};
+}
 
 export default Main;
