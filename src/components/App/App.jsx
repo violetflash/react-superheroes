@@ -10,7 +10,7 @@ class App extends Component {
         target: null
     }
 
-    data = new RestApiService();
+    getData = new RestApiService();
 
     toggleHandler = () => {
         this.setState(() => {
@@ -19,7 +19,7 @@ class App extends Component {
     }
 
     setTarget = id => {
-        this.data.getPerson(id).then(res => {
+        this.getData.getPerson(id).then(res => {
             this.setState({ target: res });
             console.log(res);
         });
@@ -36,6 +36,7 @@ class App extends Component {
                     randomOpened={this.state.randomOpened}
                     setTarget={this.setTarget}
                     target={this.state.target}
+                    getData={this.getData}
                 />
                 <Main
                     randomOpened={this.state.randomOpened}

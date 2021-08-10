@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { getRandomIDsFromArr } from "../../functions/functions";
 import Cards from "./Cards/";
 import Controls from "./Controls/";
-import RestApiService from "../../services/RestApiService/";
 import s from "./Panel.module.scss";
 
 
 class Panel extends Component {
 
-    restApiService = new RestApiService();
-    LS_KEY = this.restApiService._LS_KEY;
+    getData = this.props.getData;
     RAND_NUM = 10;
     toggleHandler = this.props.toggleHandler;
 
@@ -31,13 +29,13 @@ class Panel extends Component {
     async componentDidMount() {
         //fills state with random heroes
         //check if data already exist
-        if (localStorage.getItem(this.LS_KEY)) {
+        if (localStorage.getItem(this.getData._LS_KEY)) {
             this.getRandomHeroesFromLS();
             return;
         }
 
         try {
-            const array = await this.restApiService.saveAllRandDataToLS();
+            const array = await this.getData.saveAllRandDataToLS();
             this.setState({
                 randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM),
                 isLoading: false
@@ -48,7 +46,7 @@ class Panel extends Component {
     }
 
     getRandomHeroesFromLS = () => {
-        const array = JSON.parse(localStorage.getItem(this.LS_KEY));
+        const array = JSON.parse(localStorage.getItem(this.getData._LS_KEY));
         this.setState({
             randomHeroes: getRandomIDsFromArr(array, this.RAND_NUM),
             isLoading: false
@@ -58,7 +56,7 @@ class Panel extends Component {
     updateHeroes = () => {
         const updateInterval = setInterval(() => {
             this.setState({
-                randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.LS_KEY)), this.RAND_NUM)
+                randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.getData._LS_KEY)), this.RAND_NUM)
             });
         }, 10000);
         this.setState({ intervalID: updateInterval });
