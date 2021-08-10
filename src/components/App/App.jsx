@@ -3,6 +3,7 @@ import Header from "../Header";
 import Panel from "../Panel";
 import Main from '../Main/';
 import RestApiService from "../../services/RestApiService";
+import { RestApiServiceProvider } from "../../services/RestApiServiceContext";
 
 class App extends Component {
     state = {
@@ -30,19 +31,21 @@ class App extends Component {
 
         return (
             <>
-                <Header/>
-                <Panel
-                    toggleHandler={this.toggleHandler}
-                    randomOpened={this.state.randomOpened}
-                    setTarget={this.setTarget}
-                    target={this.state.target}
-                    getData={this.getData}
-                />
-                <Main
-                    randomOpened={this.state.randomOpened}
-                    setTarget={this.setTarget}
-                    target={this.state.target}
-                />
+                <RestApiServiceProvider value={this.setTarget}>
+                    <Header/>
+                    <Panel
+                        toggleHandler={this.toggleHandler}
+                        randomOpened={this.state.randomOpened}
+                        // setTarget={this.setTarget}
+                        target={this.state.target}
+                        getData={this.getData}
+                    />;
+                    <Main
+                        randomOpened={this.state.randomOpened}
+                        setTarget={this.setTarget}
+                        target={this.state.target}
+                    />
+                </RestApiServiceProvider>
             </>
         );
     }

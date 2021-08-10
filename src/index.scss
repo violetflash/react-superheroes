@@ -23,6 +23,7 @@ body {
   color: $blue-1;
   max-height: 100vh;
   overflow: hidden;
+  background: $mainSectionBgColor;
 
   &.js-overflow {
     overflow: hidden;

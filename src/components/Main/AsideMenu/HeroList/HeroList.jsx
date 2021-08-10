@@ -5,89 +5,102 @@ import { addConditionedStyle } from '../../../../functions/functions';
 import Loader from "../../../Loader/";
 import Error from "../../../Error/";
 
-class HeroList extends Component {
+function HeroList(props) {
+    const { setTarget } = props;
 
-    restApiService = new RestApiService();
-    LS_KEY = this.restApiService._LS_KEY;
-
-    state = {
-        allHeroes: [],
-        activeBtnID: null,
-        error: false,
-        isLoading: true
+    const btnHandler = id => {
+        setTarget(id);
     };
 
-    onError(e) {
-        this.setState({ error: true });
-        console.error(e);
-    }
+    const regExp = new RegExp(props.searchTerm, 'i');
 
-    async componentDidMount() {
-
-        if (localStorage.getItem(this.LS_KEY)) {
-            this.setState({
-                allHeroes: JSON.parse(localStorage.getItem(this.LS_KEY))
-            });
-            this.setState({ isLoading: false });
-            return;
-        }
-
-        try {
-            const array = await this.restApiService.saveAllRandDataToLS();
-            this.setState(
-                { allHeroes: array });
-        } catch (e) {
-            this.onError(e);
-        }
-        this.setState({ isLoading: false });
-    }
-
-    render() {
-        const { setTarget } = this.props;
-
-        const btnHandler = id => {
-            setTarget(id);
-            this.setState({ activeBtnID: id });
-        };
-
-        const regExp = new RegExp(this.props.searchTerm, 'i');
-
-        const result = this.state.allHeroes
-            .filter(hero => regExp.test(hero.name))
-            .map(hero => {
-                const btnClass = addConditionedStyle(
-                    this.props.target?.id === hero.id,
-                    [s.List__btn],
-                    s.active
-                );
+    const result = props.allHeroes
+        .filter(hero => regExp.test(hero.name))
+        .map(hero => {
+            const btnClass = addConditionedStyle(
+                props.target?.id === hero.id,
+                [s.List__btn],
+                s.active
+            );
 
 
-                return (
-                    <li key={hero.id}>
-                        <button
-                            type="button"
-                            className={btnClass.join(' ')}
-                            onClick={() => btnHandler(hero.id)}
-                        >
-                            <span>{hero.name}</span>
-                        </button>
-                    </li>
-                );
-            });
+            return (
+                <li key={hero.id}>
+                    <button
+                        type="button"
+                        className={btnClass.join(' ')}
+                        onClick={() => btnHandler(hero.id)}
+                    >
+                        <span>{hero.name}</span>
+                    </button>
+                </li>
+            );
+        });
 
-        const listOfHeroes = this.state.error ?
-            <Error/> :
-            this.state.isLoading ? <Loader/> :
-                result;
+    const listOfHeroes = props.error ?
+        <Error/> :
+        props.isLoading ? <Loader/> :
+            result;
 
-        const ulClass = addConditionedStyle(!this.props.randomOpened, [s.List], s.full);
+    const ulClass = addConditionedStyle(!props.randomOpened, [s.List], s.full);
 
-        return (
-            <ul className={ulClass.join(' ')}>
-                {listOfHeroes}
-            </ul>
-        );
-    }
+    return (
+        <ul className={ulClass.join(' ')}>
+            {listOfHeroes}
+        </ul>
+    );
 }
 
-export default HeroList;
+const addData = (View, getData) => {
+    return class extends Component {
+
+
+        LS_KEY = getData._LS_KEY;
+
+        state = {
+            allHeroes: [],
+            error: false,
+            isLoading: true
+        };
+
+        onError = e => {
+            this.setState({ error: true });
+            console.error(e);
+        }
+
+        componentDidMount = async () => {
+
+            if (localStorage.getItem(this.LS_KEY)) {
+                this.setState({
+                    allHeroes: JSON.parse(localStorage.getItem(this.LS_KEY))
+                });
+                this.setState({ isLoading: false });
+                return;
+            }
+
+            try {
+                const array = await getData.saveAllRandDataToLS();
+                this.setState(
+                    { allHeroes: array });
+            } catch (e) {
+                this.onError(e);
+            }
+            this.setState({ isLoading: false });
+        }
+
+        render() {
+            return <View
+                {...this.props}
+                allHeroes={this.state.allHeroes}
+                error={this.state.error}
+                isLoading={this.state.isLoading}
+            />;
+        }
+    };
+};
+
+const restApiService = new RestApiService();
+
+export default addData(HeroList, restApiService);
+
+

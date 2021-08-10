@@ -4,7 +4,6 @@ import Cards from "./Cards/";
 import Controls from "./Controls/";
 import s from "./Panel.module.scss";
 
-
 class Panel extends Component {
 
     getData = this.props.getData;
@@ -62,12 +61,6 @@ class Panel extends Component {
         this.setState({ intervalID: updateInterval });
     }
 
-    // toggleHandler = () => {
-    //     this.setState(() => {
-    //         return { randomOpened: !this.state.randomOpened };
-    //     });
-    // }
-
     pauseUpdating = () => {
         clearInterval(this.state.intervalID);
         this.setState({ intervalID: null });
@@ -80,7 +73,7 @@ class Panel extends Component {
                 {...this.state}
                 updateHeroes={this.updateHeroes}
                 pauseUpdating={this.pauseUpdating}
-                setTarget={this.props.setTarget}
+                // setTarget={this.props.setTarget}
                 target={this.props.target}
             /> :
             null;

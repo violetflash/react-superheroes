@@ -57,7 +57,6 @@ class HeroRandomCard extends React.Component {
                     <span className={s.Card__name}>{name}</span>
                     <span className={s.Card__line}/>
                 </div>
-                {/*<span className={s.Card__fullName}>{fullName === name ? '' : fullName}</span>*/}
             </article>
         );
     }

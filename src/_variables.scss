@@ -28,8 +28,8 @@ $headerHeight: 7vh;
 $panelHeight: 4vh;
 $randomHeroesHeight: 27vh;
 $searchBarHeight: 4vh;
-$heroListHeightFull: 100vh - $headerHeight - $panelHeight - $searchBarHeight - 2;
-$heroListHeightShort: 100vh - $headerHeight - $panelHeight - $searchBarHeight - $randomHeroesHeight - 2;
+$heroListHeightFull: 100vh - $headerHeight - $panelHeight - $searchBarHeight - 4;
+$heroListHeightShort: $heroListHeightFull - $randomHeroesHeight;
 
 //HeroCard image size
 $heroCardFigureWidth: 320px;
