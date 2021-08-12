@@ -22,7 +22,6 @@ class App extends Component {
     setTarget = id => {
         this.getData.getPerson(id).then(res => {
             this.setState({ target: res });
-            console.log(res);
         });
 
     };

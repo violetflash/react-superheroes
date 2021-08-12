@@ -53,11 +53,12 @@ class Panel extends Component {
     };
 
     updateHeroes = () => {
+        const { updateTimeout } = this.props;
         const updateInterval = setInterval(() => {
             this.setState({
                 randomHeroes: getRandomIDsFromArr(JSON.parse(localStorage.getItem(this.getData._LS_KEY)), this.RAND_NUM)
             });
-        }, 10000);
+        }, updateTimeout);
         this.setState({ intervalID: updateInterval });
     }
 
@@ -97,5 +98,9 @@ class Panel extends Component {
         );
     }
 }
+
+Panel.defaultProps = {
+    updateTimeout: 10000
+};
 
 export default Panel;
